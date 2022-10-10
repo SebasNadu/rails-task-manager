@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <h1>My Tasks</h1>
+
+  <% @tasks.each do |task| %>
+    <div class="form-check">
+      <% if task.completed? %>
+          <i class="fa-regular fa-square-check"></i>
+        <% else %>
+          <i class="fa-regular fa-square"></i>
+        <% end %>
+      <label class="form-check-label" for="flexCheckDefault">
+        <%= link_to task.title, task_path(task) %> 
+      </label>
+      <%= link_to task_path(task.id), data: {turbo_method: :delete, turbo_confirm: "Delete #{task.title}?"} do %>
+          <i class="fa-regular fa-trash-can"></i>
+        <% end %>
+    </div>
+  <% end %>
+   <%= link_to new_task_path do %>
+    <i class="fa-solid fa-plus"></i> Add a new task
+  <% end %>
+</div>
